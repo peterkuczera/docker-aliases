@@ -16,7 +16,7 @@ docker-connect() {
 
     NAME=$1
     ID=$(docker ps | grep $NAME | awk '{print $1}')
-    docker exec -it $ID bash -c "export TERM=linux; bash"
+    docker exec -it $ID bash -c "export TERM=xterm; bash"
 }
 
 docker-list-container-ips() {
