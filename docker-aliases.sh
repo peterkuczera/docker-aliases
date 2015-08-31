@@ -18,3 +18,11 @@ docker-connect() {
     ID=$(docker ps | grep $NAME | awk '{print $1}')
     docker exec -it $ID bash -c "export TERM=linux; bash"
 }
+
+docker-list-container-ips() {
+    echo "ID\tName\tIP Address"
+    for container in $(docker ps -q); do
+        echo "container = $container"
+        docker inspect --format '{{ .Id }} {{ .Name }} {{ .NetworkSettings.IPAddress }}'
+    done
+}
