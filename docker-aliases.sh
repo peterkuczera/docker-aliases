@@ -20,9 +20,10 @@ docker-connect() {
 }
 
 docker-list-container-ips() {
-    echo "ID\tName\tIP Address"
-    for container in $(docker ps -q); do
-        echo "container = $container"
-        docker inspect --format '{{ .Id }} {{ .Name }} {{ .NetworkSettings.IPAddress }}' $container
+    printf "%-12s   %-15s   %s\n" "CONTAINER ID" "IP" "NAMES"
+    for ID in $(docker ps -q); do
+        NAMES=$(docker inspect --format '{{ .Name }}' $ID)
+        IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $ID)
+        printf "%-12s   %-15s   %s\n" $ID $IP $NAMES
     done
 }
