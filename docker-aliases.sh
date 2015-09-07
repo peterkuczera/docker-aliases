@@ -23,6 +23,6 @@ docker-list-container-ips() {
     echo "ID\tName\tIP Address"
     for container in $(docker ps -q); do
         echo "container = $container"
-        docker inspect --format '{{ .Id }} {{ .Name }} {{ .NetworkSettings.IPAddress }}'
+        docker inspect --format '{{ .Id }} {{ .Name }} {{ .NetworkSettings.IPAddress }}' $container
     done
 }
